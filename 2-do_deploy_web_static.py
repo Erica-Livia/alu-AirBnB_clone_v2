@@ -9,12 +9,11 @@ import re
 
 # Set the username and host for SSH connection to the server
 env.user = 'ubuntu'
-env.hosts = ['107.20.75.201', '107.20.75.201']
+env.hosts = ['107.20.75.201', '54.235.37.236']
 env.key_filename = '~/.ssh/id_rsa'
 
 
 def do_deploy(archive_path):
-
     """deploy web static"""
     if not exists(archive_path):
         return False
@@ -30,11 +29,6 @@ def do_deploy(archive_path):
         run("rm -rf {}/web_static".format(path_name))
         run('rm -rf /data/web_static/current')
         run('ln -s {}/ /data/web_static/current'.format(path_name))
-
-        if not isdir("/var/www/html/hbnb_static"):
-            run("sudo mkdir -p /var/www/html/hbnb_static")
-
-        run("sudo cp -r /data/web_static/current/* /var/www/html/hbnb_static/")
         return True
     except Exception:
         return False
