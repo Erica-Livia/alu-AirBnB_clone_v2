@@ -1,28 +1,31 @@
 #!/usr/bin/python3
-"""simple flask routes"""
+""" Web application listening on 0.0.0.0, port 5000 """
 from flask import Flask
 
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
-def hello():
-    """return message"""
+@app.route("/")
+def hello_hbnb():
+    """ Display Hello HBNB! """
     return "Hello HBNB!"
 
 
-@app.route('/hbnb', strict_slashes=False)
+@app.route("/hbnb")
 def hbnb():
-    """return message HBNB"""
+    """ Display HBNB! """
     return "HBNB"
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def c_fun(text):
-    """return message with paramns"""
-    new_text = text.replace("_", " ")
-    return "C {}".format(new_text)
+@app.route("/c/<text>")
+def c_is_fun(text):
+    """
+    Display 'C' followed by the value of text
+    Replace underscore _ symbols with a space
+    """
+    return "C {}".format(text.replace("_", " "))
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host="0.0.0.0", port=5000)
+    app.url_map.strict_slashes = False
